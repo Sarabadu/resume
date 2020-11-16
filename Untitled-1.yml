@@ -1,0 +1,821 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  VPCB9E5F0B4:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      InstanceTenancy: default
+      Tags:
+        - Key: Name
+          Value: aws-cdk-aviza/VPC
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/Resource
+      'AWS::CloudFormation::Designer':
+        id: e7c35661-3bcc-4380-8095-e0444e3b5604
+  VPCPublicSubnet1SubnetB4246D30:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: 10.0.0.0/18
+      VpcId:
+        Ref: VPCB9E5F0B4
+      AvailabilityZone:
+        'Fn::Select':
+          - 0
+          - 'Fn::GetAZs': ''
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: 'aws-cdk:subnet-name'
+          Value: Public
+        - Key: 'aws-cdk:subnet-type'
+          Value: Public
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PublicSubnet1
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet1/Subnet
+      'AWS::CloudFormation::Designer':
+        id: 145addf2-2f41-4192-8ba9-7c0f1327d85b
+  VPCPublicSubnet1RouteTableFEE4B781:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      Tags:
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PublicSubnet1
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet1/RouteTable
+      'AWS::CloudFormation::Designer':
+        id: 3017e419-5e9b-42ff-9563-8e85f10df972
+  VPCPublicSubnet1RouteTableAssociation0B0896DC:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      RouteTableId:
+        Ref: VPCPublicSubnet1RouteTableFEE4B781
+      SubnetId:
+        Ref: VPCPublicSubnet1SubnetB4246D30
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet1/RouteTableAssociation
+      'AWS::CloudFormation::Designer':
+        id: e3b6f224-ff85-4efd-af85-493779c80271
+  VPCPublicSubnet1DefaultRoute91CEF279:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId:
+        Ref: VPCPublicSubnet1RouteTableFEE4B781
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: VPCIGWB7E252D3
+    DependsOn:
+      - VPCVPCGW99B986DC
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet1/DefaultRoute
+      'AWS::CloudFormation::Designer':
+        id: 19b57c68-aa62-417b-b341-fa5094655638
+  VPCPublicSubnet1EIP6AD938E8:
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: vpc
+      Tags:
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PublicSubnet1
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet1/EIP
+      'AWS::CloudFormation::Designer':
+        id: 26d4c19c-326e-456d-a55a-c5bbf4ad07f3
+  VPCPublicSubnet1NATGatewayE0556630:
+    Type: 'AWS::EC2::NatGateway'
+    Properties:
+      AllocationId:
+        'Fn::GetAtt':
+          - VPCPublicSubnet1EIP6AD938E8
+          - AllocationId
+      SubnetId:
+        Ref: VPCPublicSubnet1SubnetB4246D30
+      Tags:
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PublicSubnet1
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet1/NATGateway
+      'AWS::CloudFormation::Designer':
+        id: a7774654-50e2-4893-80d7-b712b1914280
+  VPCPublicSubnet2Subnet74179F39:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: 10.0.64.0/18
+      VpcId: !Ref VPCB9E5F0B4
+      AvailabilityZone:
+        'Fn::Select':
+          - 1
+          - 'Fn::GetAZs': ''
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: 'aws-cdk:subnet-name'
+          Value: Public
+        - Key: 'aws-cdk:subnet-type'
+          Value: Public
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PublicSubnet2
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet2/Subnet
+      'AWS::CloudFormation::Designer':
+        id: ac53cdcd-039a-41bb-9f97-5a02deede95a
+  VPCPublicSubnet2RouteTable6F1A15F1:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      Tags:
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PublicSubnet2
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet2/RouteTable
+      'AWS::CloudFormation::Designer':
+        id: 51028641-515e-4f8b-8152-b0b817e20d65
+  VPCPublicSubnet2RouteTableAssociation5A808732:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      RouteTableId:
+        Ref: VPCPublicSubnet2RouteTable6F1A15F1
+      SubnetId:
+        Ref: VPCPublicSubnet2Subnet74179F39
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet2/RouteTableAssociation
+      'AWS::CloudFormation::Designer':
+        id: 7436204e-6837-4343-93f5-0443896508c5
+  VPCPublicSubnet2DefaultRouteB7481BBA:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId:
+        Ref: VPCPublicSubnet2RouteTable6F1A15F1
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: VPCIGWB7E252D3
+    DependsOn:
+      - VPCVPCGW99B986DC
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet2/DefaultRoute
+      'AWS::CloudFormation::Designer':
+        id: 0d9a7577-d3a4-4db4-9be9-264bf5a992b9
+  VPCPublicSubnet2EIP4947BC00:
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: vpc
+      Tags:
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PublicSubnet2
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet2/EIP
+      'AWS::CloudFormation::Designer':
+        id: 01bf37ed-3755-4e7e-bae6-36e6add77425
+  VPCPublicSubnet2NATGateway3C070193:
+    Type: 'AWS::EC2::NatGateway'
+    Properties:
+      AllocationId:
+        'Fn::GetAtt':
+          - VPCPublicSubnet2EIP4947BC00
+          - AllocationId
+      SubnetId:
+        Ref: VPCPublicSubnet2Subnet74179F39
+      Tags:
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PublicSubnet2
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PublicSubnet2/NATGateway
+      'AWS::CloudFormation::Designer':
+        id: 766fb780-6217-41ad-9a11-50ac4d44b642
+  VPCPrivateSubnet1Subnet8BCA10E0:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: 10.0.128.0/18
+      VpcId: !Ref VPCB9E5F0B4
+      AvailabilityZone:
+        'Fn::Select':
+          - 0
+          - 'Fn::GetAZs': ''
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: 'aws-cdk:subnet-name'
+          Value: Private
+        - Key: 'aws-cdk:subnet-type'
+          Value: Private
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PrivateSubnet1
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PrivateSubnet1/Subnet
+      'AWS::CloudFormation::Designer':
+        id: 0833809b-1abc-43a6-abdc-3276674b3a84
+  VPCPrivateSubnet1RouteTableBE8A6027:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      Tags:
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PrivateSubnet1
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PrivateSubnet1/RouteTable
+      'AWS::CloudFormation::Designer':
+        id: 2da1e3b8-5724-4039-828a-53793d5ecbd3
+  VPCPrivateSubnet1RouteTableAssociation347902D1:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      RouteTableId:
+        Ref: VPCPrivateSubnet1RouteTableBE8A6027
+      SubnetId:
+        Ref: VPCPrivateSubnet1Subnet8BCA10E0
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PrivateSubnet1/RouteTableAssociation
+      'AWS::CloudFormation::Designer':
+        id: 7d5fc3ea-bd76-4a89-a2c3-2d2d18adba7c
+  VPCPrivateSubnet1DefaultRouteAE1D6490:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId:
+        Ref: VPCPrivateSubnet1RouteTableBE8A6027
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId:
+        Ref: VPCPublicSubnet1NATGatewayE0556630
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PrivateSubnet1/DefaultRoute
+      'AWS::CloudFormation::Designer':
+        id: a3ba9292-7b1b-43ee-b472-92e003de2975
+  VPCPrivateSubnet2SubnetCFCDAA7A:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: 10.0.192.0/18
+      VpcId: !Ref VPCB9E5F0B4
+      AvailabilityZone:
+        'Fn::Select':
+          - 1
+          - 'Fn::GetAZs': ''
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: 'aws-cdk:subnet-name'
+          Value: Private
+        - Key: 'aws-cdk:subnet-type'
+          Value: Private
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PrivateSubnet2
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PrivateSubnet2/Subnet
+      'AWS::CloudFormation::Designer':
+        id: 3540e307-9c84-4510-98f4-9949186e51a4
+  VPCPrivateSubnet2RouteTable0A19E10E:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      Tags:
+        - Key: Name
+          Value: aws-cdk-aviza/VPC/PrivateSubnet2
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PrivateSubnet2/RouteTable
+      'AWS::CloudFormation::Designer':
+        id: 70c69961-d4db-4308-9065-cd208b50e04e
+  VPCPrivateSubnet2RouteTableAssociation0C73D413:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      RouteTableId:
+        Ref: VPCPrivateSubnet2RouteTable0A19E10E
+      SubnetId:
+        Ref: VPCPrivateSubnet2SubnetCFCDAA7A
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PrivateSubnet2/RouteTableAssociation
+      'AWS::CloudFormation::Designer':
+        id: 6c82fe6b-3924-41f5-9446-135da1a5ba06
+  VPCPrivateSubnet2DefaultRouteF4F5CFD2:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId:
+        Ref: VPCPrivateSubnet2RouteTable0A19E10E
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId:
+        Ref: VPCPublicSubnet2NATGateway3C070193
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/PrivateSubnet2/DefaultRoute
+      'AWS::CloudFormation::Designer':
+        id: 6afe7d55-2511-4ba0-9e56-7ceab0ca5324
+  VPCIGWB7E252D3:
+    Type: 'AWS::EC2::InternetGateway'
+    Properties:
+      Tags:
+        - Key: Name
+          Value: aws-cdk-aviza/VPC
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/IGW
+      'AWS::CloudFormation::Designer':
+        id: 3cb00963-aa19-4ac5-ae33-2fa4ec3f5a31
+  VPCVPCGW99B986DC:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      InternetGatewayId:
+        Ref: VPCIGWB7E252D3
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/VPC/VPCGW
+      'AWS::CloudFormation::Designer':
+        id: 554ee90a-01ec-44ba-91f4-23cfa8a02257
+  RDSSubnetGroup3527AC04:
+    Type: 'AWS::RDS::DBSubnetGroup'
+    Properties:
+      DBSubnetGroupDescription: Subnet group for RDS database
+      SubnetIds:
+        - Ref: VPCPrivateSubnet1Subnet8BCA10E0
+        - Ref: VPCPrivateSubnet2SubnetCFCDAA7A
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/RDS/SubnetGroup/Default
+      'AWS::CloudFormation::Designer':
+        id: 98fec744-d9b3-4e94-9671-992a9f935228
+  RDSSecurityGroupF0B4328E:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Security group for RDS database
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          Description: Allow all outbound traffic by default
+          IpProtocol: '-1'
+      VpcId: !Ref VPCB9E5F0B4
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/RDS/SecurityGroup/Resource
+      'AWS::CloudFormation::Designer':
+        id: 32bc772e-301c-466a-9c6c-c75ea2a30f62
+  RDSSecret3683CA93:
+    Type: 'AWS::SecretsManager::Secret'
+    Properties:
+      Description:
+        'Fn::Join':
+          - ''
+          - - 'Generated by the CDK for stack: '
+            - Ref: 'AWS::StackName'
+      GenerateSecretString:
+        ExcludeCharacters: ' %+~`#$&*()|[]{}:;<>?!''/@"\'
+        GenerateStringKey: password
+        PasswordLength: 30
+        SecretStringTemplate: '{"username":"admin"}'
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/RDS/Secret/Resource
+      'AWS::CloudFormation::Designer':
+        id: 3938f153-d87e-497c-a93c-dd1b49472e7d
+  RDSSecretAttachment39FC3A79:
+    Type: 'AWS::SecretsManager::SecretTargetAttachment'
+    Properties:
+      SecretId:
+        Ref: RDSSecret3683CA93
+      TargetId:
+        Ref: RDSE0E96D00
+      TargetType: 'AWS::RDS::DBInstance'
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/RDS/Secret/Attachment/Resource
+      'AWS::CloudFormation::Designer':
+        id: eca8257c-678d-4ce3-9cac-0616cef814e0
+  RDSE0E96D00:
+    Type: 'AWS::RDS::DBInstance'
+    Properties:
+      DBInstanceClass: db.t2.micro
+      AllocatedStorage: '20'
+      CopyTagsToSnapshot: true
+      DBName: aviza-mysql-db
+      DBSubnetGroupName:
+        Ref: RDSSubnetGroup3527AC04
+      DeletionProtection: false
+      Engine: mysql
+      EngineVersion: 8.0.16
+      MasterUsername:
+        'Fn::Join':
+          - ''
+          - - '{{resolve:secretsmanager:'
+            - Ref: RDSSecret3683CA93
+            - ':SecretString:username::}}'
+      MasterUserPassword:
+        'Fn::Join':
+          - ''
+          - - '{{resolve:secretsmanager:'
+            - Ref: RDSSecret3683CA93
+            - ':SecretString:password::}}'
+      MultiAZ: false
+      Port: '3306'
+      StorageType: gp2
+      VPCSecurityGroups:
+        - 'Fn::GetAtt':
+            - RDSSecurityGroupF0B4328E
+            - GroupId
+    UpdateReplacePolicy: Delete
+    DeletionPolicy: Delete
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/RDS/Resource
+      'AWS::CloudFormation::Designer':
+        id: fe8463d4-28ed-438e-9fd6-58a82220b623
+  CDKMetadata:
+    Type: 'AWS::CDK::Metadata'
+    Properties:
+      Modules: >-
+        aws-cdk=1.69.0,@aws-cdk/assets=1.69.0,@aws-cdk/aws-applicationautoscaling=1.69.0,@aws-cdk/aws-autoscaling-common=1.69.0,@aws-cdk/aws-cloudwatch=1.69.0,@aws-cdk/aws-codeguruprofiler=1.69.0,@aws-cdk/aws-ec2=1.69.0,@aws-cdk/aws-efs=1.69.0,@aws-cdk/aws-events=1.69.0,@aws-cdk/aws-iam=1.69.0,@aws-cdk/aws-kms=1.69.0,@aws-cdk/aws-lambda=1.69.0,@aws-cdk/aws-logs=1.69.0,@aws-cdk/aws-rds=1.69.0,@aws-cdk/aws-s3=1.69.0,@aws-cdk/aws-s3-assets=1.69.0,@aws-cdk/aws-sam=1.69.0,@aws-cdk/aws-secretsmanager=1.69.0,@aws-cdk/aws-sqs=1.69.0,@aws-cdk/aws-ssm=1.69.0,@aws-cdk/cloud-assembly-schema=1.69.0,@aws-cdk/core=1.69.0,@aws-cdk/cx-api=1.69.0,@aws-cdk/region-info=1.69.0,jsii-runtime=Python/3.8.5
+    Metadata:
+      'aws:cdk:path': aws-cdk-aviza/CDKMetadata/Default
+      'AWS::CloudFormation::Designer':
+        id: 495acdce-c714-4e72-b15c-f3d5af087e00
+    Condition: CDKMetadataAvailable
+Conditions:
+  CDKMetadataAvailable:
+    'Fn::Or':
+      - 'Fn::Or':
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - ap-east-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - ap-northeast-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - ap-northeast-2
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - ap-south-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - ap-southeast-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - ap-southeast-2
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - ca-central-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - cn-north-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - cn-northwest-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - eu-central-1
+      - 'Fn::Or':
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - eu-north-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - eu-west-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - eu-west-2
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - eu-west-3
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - me-south-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - sa-east-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - us-east-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - us-east-2
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - us-west-1
+          - 'Fn::Equals':
+              - Ref: 'AWS::Region'
+              - us-west-2
+Metadata:
+  'AWS::CloudFormation::Designer':
+    495acdce-c714-4e72-b15c-f3d5af087e00:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 1290
+        'y': 780
+      z: 1
+      embeds: []
+    3938f153-d87e-497c-a93c-dd1b49472e7d:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 60
+        'y': 1770
+      z: 1
+      embeds: []
+    3cb00963-aa19-4ac5-ae33-2fa4ec3f5a31:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 510
+        'y': 30
+      z: 1
+      embeds: []
+    01bf37ed-3755-4e7e-bae6-36e6add77425:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 870
+        'y': 150
+      z: 1
+      embeds: []
+    26d4c19c-326e-456d-a55a-c5bbf4ad07f3:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 30
+        'y': 240
+      z: 1
+      embeds: []
+    e7c35661-3bcc-4380-8095-e0444e3b5604:
+      size:
+        width: 2100
+        height: 1590
+      position:
+        x: 110
+        'y': 150
+      z: 1
+      embeds:
+        - 70c69961-d4db-4308-9065-cd208b50e04e
+        - 2da1e3b8-5724-4039-828a-53793d5ecbd3
+        - 51028641-515e-4f8b-8152-b0b817e20d65
+        - ac53cdcd-039a-41bb-9f97-5a02deede95a
+        - 3017e419-5e9b-42ff-9563-8e85f10df972
+        - 145addf2-2f41-4192-8ba9-7c0f1327d85b
+    32bc772e-301c-466a-9c6c-c75ea2a30f62:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 960
+        'y': 270
+      z: 1
+      embeds: []
+      iscontainedinside:
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+    554ee90a-01ec-44ba-91f4-23cfa8a02257:
+      source:
+        id: e7c35661-3bcc-4380-8095-e0444e3b5604
+      target:
+        id: 3cb00963-aa19-4ac5-ae33-2fa4ec3f5a31
+      z: 1
+    70c69961-d4db-4308-9065-cd208b50e04e:
+      size:
+        width: 480
+        height: 540
+      position:
+        x: 740
+        'y': 510
+      z: 2
+      parent: e7c35661-3bcc-4380-8095-e0444e3b5604
+      embeds:
+        - 6afe7d55-2511-4ba0-9e56-7ceab0ca5324
+      iscontainedinside:
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+    3540e307-9c84-4510-98f4-9949186e51a4:
+      size:
+        width: 150
+        height: 150
+      position:
+        x: 840
+        'y': 90
+      z: 1
+      embeds: []
+      iscontainedinside:
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+    6c82fe6b-3924-41f5-9446-135da1a5ba06:
+      source:
+        id: 70c69961-d4db-4308-9065-cd208b50e04e
+      target:
+        id: 3540e307-9c84-4510-98f4-9949186e51a4
+      z: 2
+    2da1e3b8-5724-4039-828a-53793d5ecbd3:
+      size:
+        width: 480
+        height: 540
+      position:
+        x: 440
+        'y': 480
+      z: 2
+      parent: e7c35661-3bcc-4380-8095-e0444e3b5604
+      embeds:
+        - a3ba9292-7b1b-43ee-b472-92e003de2975
+      iscontainedinside:
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+    0833809b-1abc-43a6-abdc-3276674b3a84:
+      size:
+        width: 150
+        height: 150
+      position:
+        x: 930
+        'y': 510
+      z: 1
+      embeds: []
+      iscontainedinside:
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+    98fec744-d9b3-4e94-9671-992a9f935228:
+      size:
+        width: 240
+        height: 240
+      position:
+        x: 1080
+        'y': 90
+      z: 1
+      embeds:
+        - fe8463d4-28ed-438e-9fd6-58a82220b623
+      iscontainedinside:
+        - 0833809b-1abc-43a6-abdc-3276674b3a84
+        - 3540e307-9c84-4510-98f4-9949186e51a4
+    fe8463d4-28ed-438e-9fd6-58a82220b623:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 1110
+        'y': 150
+      z: 2
+      parent: 98fec744-d9b3-4e94-9671-992a9f935228
+      embeds: []
+      isassociatedwith:
+        - 32bc772e-301c-466a-9c6c-c75ea2a30f62
+      iscontainedinside:
+        - 98fec744-d9b3-4e94-9671-992a9f935228
+        - 98fec744-d9b3-4e94-9671-992a9f935228
+    eca8257c-678d-4ce3-9cac-0616cef814e0:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 180
+        'y': 1770
+      z: 1
+      embeds: []
+    7d5fc3ea-bd76-4a89-a2c3-2d2d18adba7c:
+      source:
+        id: 2da1e3b8-5724-4039-828a-53793d5ecbd3
+      target:
+        id: 0833809b-1abc-43a6-abdc-3276674b3a84
+      z: 2
+    51028641-515e-4f8b-8152-b0b817e20d65:
+      size:
+        width: 480
+        height: 540
+      position:
+        x: 140
+        'y': 750
+      z: 2
+      parent: e7c35661-3bcc-4380-8095-e0444e3b5604
+      embeds:
+        - 0d9a7577-d3a4-4db4-9be9-264bf5a992b9
+      iscontainedinside:
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+    0d9a7577-d3a4-4db4-9be9-264bf5a992b9:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 290
+        'y': 960
+      z: 3
+      parent: 51028641-515e-4f8b-8152-b0b817e20d65
+      embeds: []
+      isassociatedwith:
+        - 3cb00963-aa19-4ac5-ae33-2fa4ec3f5a31
+      iscontainedinside:
+        - 51028641-515e-4f8b-8152-b0b817e20d65
+        - 51028641-515e-4f8b-8152-b0b817e20d65
+      dependson:
+        - 554ee90a-01ec-44ba-91f4-23cfa8a02257
+    ac53cdcd-039a-41bb-9f97-5a02deede95a:
+      size:
+        width: 480
+        height: 540
+      position:
+        x: 740
+        'y': 210
+      z: 2
+      parent: e7c35661-3bcc-4380-8095-e0444e3b5604
+      embeds:
+        - 766fb780-6217-41ad-9a11-50ac4d44b642
+      iscontainedinside:
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+    766fb780-6217-41ad-9a11-50ac4d44b642:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 890
+        'y': 420
+      z: 3
+      parent: ac53cdcd-039a-41bb-9f97-5a02deede95a
+      embeds: []
+      iscontainedinside:
+        - ac53cdcd-039a-41bb-9f97-5a02deede95a
+        - ac53cdcd-039a-41bb-9f97-5a02deede95a
+    6afe7d55-2511-4ba0-9e56-7ceab0ca5324:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 890
+        'y': 720
+      z: 3
+      parent: 70c69961-d4db-4308-9065-cd208b50e04e
+      embeds: []
+      isassociatedwith:
+        - 766fb780-6217-41ad-9a11-50ac4d44b642
+      iscontainedinside:
+        - 70c69961-d4db-4308-9065-cd208b50e04e
+        - 70c69961-d4db-4308-9065-cd208b50e04e
+    7436204e-6837-4343-93f5-0443896508c5:
+      source:
+        id: 51028641-515e-4f8b-8152-b0b817e20d65
+      target:
+        id: ac53cdcd-039a-41bb-9f97-5a02deede95a
+      z: 2
+    3017e419-5e9b-42ff-9563-8e85f10df972:
+      size:
+        width: 480
+        height: 540
+      position:
+        x: 140
+        'y': 210
+      z: 2
+      parent: e7c35661-3bcc-4380-8095-e0444e3b5604
+      embeds:
+        - 19b57c68-aa62-417b-b341-fa5094655638
+      iscontainedinside:
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+    19b57c68-aa62-417b-b341-fa5094655638:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 290
+        'y': 420
+      z: 3
+      parent: 3017e419-5e9b-42ff-9563-8e85f10df972
+      embeds: []
+      isassociatedwith:
+        - 3cb00963-aa19-4ac5-ae33-2fa4ec3f5a31
+      iscontainedinside:
+        - 3017e419-5e9b-42ff-9563-8e85f10df972
+        - 3017e419-5e9b-42ff-9563-8e85f10df972
+      dependson:
+        - 554ee90a-01ec-44ba-91f4-23cfa8a02257
+    145addf2-2f41-4192-8ba9-7c0f1327d85b:
+      size:
+        width: 480
+        height: 540
+      position:
+        x: 440
+        'y': 210
+      z: 2
+      parent: e7c35661-3bcc-4380-8095-e0444e3b5604
+      embeds:
+        - a7774654-50e2-4893-80d7-b712b1914280
+      iscontainedinside:
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+        - e7c35661-3bcc-4380-8095-e0444e3b5604
+    a7774654-50e2-4893-80d7-b712b1914280:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 590
+        'y': 420
+      z: 3
+      parent: 145addf2-2f41-4192-8ba9-7c0f1327d85b
+      embeds: []
+      iscontainedinside:
+        - 145addf2-2f41-4192-8ba9-7c0f1327d85b
+        - 145addf2-2f41-4192-8ba9-7c0f1327d85b
+    a3ba9292-7b1b-43ee-b472-92e003de2975:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 590
+        'y': 690
+      z: 3
+      parent: 2da1e3b8-5724-4039-828a-53793d5ecbd3
+      embeds: []
+      isassociatedwith:
+        - a7774654-50e2-4893-80d7-b712b1914280
+      iscontainedinside:
+        - 2da1e3b8-5724-4039-828a-53793d5ecbd3
+        - 2da1e3b8-5724-4039-828a-53793d5ecbd3
+    e3b6f224-ff85-4efd-af85-493779c80271:
+      source:
+        id: 3017e419-5e9b-42ff-9563-8e85f10df972
+      target:
+        id: 145addf2-2f41-4192-8ba9-7c0f1327d85b
+      z: 2

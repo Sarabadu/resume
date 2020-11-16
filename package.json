@@ -1,0 +1,14 @@
+{
+  "name": "myresume",
+  "version": "1.0.0",
+  "description": "CV resume Juan Pablo Garcia Ripa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^1.9.3"
+  }
+}

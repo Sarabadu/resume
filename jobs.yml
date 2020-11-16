@@ -1,0 +1,130 @@
+exp:
+- company: SOUTHWORKS
+  type: Jornada completa
+  date: jun. de 2020 – actualidad
+  q: 5 meses
+  Location: Ranelagh, Buenos Aires, Argentina
+  roles:
+    - role: Senior Developer
+      date: jun. de 2020 – actualidad
+      q: 5 meses
+      Tasks:
+        - Frontend Development (React, Vue, Angular 2, Angular.js)
+        - Backend Development (C#)
+        - Requirement Analysis
+        - Technologies Research
+        - Troubleshooting
+- company: MOBEATS
+  type: Jornada completa
+  date: nov. de 2019 – jun. de 2020
+  q: 8 meses
+  Location: Berazategui, Buenos Aires, Argentina
+  roles:
+  - role: Fullstack Software Developer, Tech Lead, Teacher
+    date: nov. de 2019 – jun. de 2020
+    q: 8 meses
+    Tasks:
+      - Teach Lead on Java and JavaScript projects (React, React-Native, Angular2).
+      - Mentoring of Junior developers.
+      - Architecture and Solution consultancy.
+      - Teaching on JavaScript workshops path.
+- company: BBVA en Argentina
+  type: Jornada completa
+  date: sept. de 2011 – nov. de 2019
+  q: 8 años y 3 meses
+  Location: Buenos Aires, Argentina
+  Tasks:
+  roles: 
+    - role: Scrum Master and Java developer
+      date: may. de 2019 – nov. de 2019
+      q: 7 meses
+      tasks: 
+        - Administration and monitoring of requirements
+        - Functional Analysis and interaction with users
+        - Java Spring MVC development
+        - Web development (js, html, css)
+        - JavaScript Teacher
+        - Agile Facilitator
+    - role: Java Software Developer
+      date: mar. de 2018 – abr. de 2019
+      q: 1 año y 2 meses
+      tasks:
+        - Administration and monitoring of requirements
+        - Functional Analysis and interaction with users
+        - Java Spring MVC development
+        - Web development (js, html, css)
+        - JavaScript Teacher
+        - Agile Facilitator
+    - role: Java and Mainframe Developer
+      date: jul. de 2017 – mar. de 2018
+      q: 9 meses
+      tasks:
+        - Scrum team member
+        - Java microservices development
+        - Api design
+        - Cobol development
+    - role: Project Leader - Escenarios Comerciales
+      date: ene. de 2015 – jun. de 2017
+      q: 2 años y 6 meses
+      tasks:                 
+        - Resource management
+        - Team Managment
+        - Functional Analysis and interaction with users
+        - Requirements Administrator
+        - Cobol, JCL, CICS, DB2 development
+    - role: Mainframe System Programmer
+      date: sept. de 2011 – dic. de 2014
+      q: 3 años y 4 meses
+      tasks:      
+        - Technical and detailed design for development of cobol DB2, online and batch components.
+        - Administration and monitoring of requirements
+        - Functional Analysis and interaction with users
+        - Requirements Administrator
+        - Cobol, JCL, CICS, DB2 development    
+
+- company: First Data Corporation
+  type: 
+  date: abr. de 2011 – sept. de 2011
+  q: 6 meses
+  Location: 
+  roles:
+    - role: Analyst Programmer Mainframe
+      date: abr. de 2011 – sept. de 2011
+      q: 6 meses
+      Tasks:
+        - Technical and detailed design for the development of COBOLl DB2, online and batch components.
+        - Requirements administration and follow-up
+- company: Accenture
+  type: 
+  date: abr. de 2008 – abr. de 2011
+  q: 
+  Location: 
+  roles:
+    - role: Analyst (Architect)
+      date: abr. de 2008 – abr. de 2011
+      q: 3 años y 1 mes
+      Tasks:
+        - Specialist in “IBERDROLA contracting” functional module
+        - Technical and detailed design for the development of COBOLl DB2, online and batch components.
+        - Requirements administration and follow-up
+        - Management of resources
+        - Training
+        - Development of COBOL components
+        - Use of Gnsis and Key generators
+        - Responsible of tools translation tasks.
+        - Development of work tools in VB.net, Batch, VB6, VBA (macros Excel, Access ).
+        - Follow-up of CMMI processes, experience with revalidation of CMMI 3 processes certificate.
+- company: UPS - United Parcel Service
+  type: 
+  date: jul. de 2005 – abr. de 2008
+  q: 2 años y 10 meses
+  Location: 
+  roles:
+    - role: Operations Assistant
+      date: jul. de 2005 – abr. de 2008
+      q: 2 años y 10 meses
+      Tasks:
+        - Preparation of shipments from their arrival to the operations center and reqistry throught their customs clearance
+        - Use of OPSYS, FDC, Exposys system.
+        - Preparation of customs forms and documentation
+        - Development of macros in Outlook and Excel.
